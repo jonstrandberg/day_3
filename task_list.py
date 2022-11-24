@@ -8,62 +8,100 @@ tasks = [
 
 
 #Print a list of uncompleted tasks
-def uncompleted_tasks():
-    list_uncompleted_tasks = []
-    for task in tasks:
+def get_uncompleted_tasks(list_of_tasks):
+    uncompleted_tasks = []
+    for task in list_of_tasks:
         if task["completed"] == False:
-            list_uncompleted_tasks.append(task["description"])
+            uncompleted_tasks.append(task)
+    return uncompleted_tasks
 
-    print(list_uncompleted_tasks)
+print(get_uncompleted_tasks(tasks))   
 
-uncompleted_tasks()
+get_uncompleted_tasks(tasks)
 
 #Print a list of completed tasks
-def completed_tasks():
-    list_of_completed_tasks = []
-    for task in tasks:
+def get_completed_tasks(list_of_tasks):
+    completed_tasks = []
+    for task in list_of_tasks:
         if task["completed"] == True:
-            list_of_completed_tasks.append(task["description"])
+            completed_tasks.append(task)
+        return completed_tasks
 
-    print(list_of_completed_tasks)
+print(get_completed_tasks(tasks))
 
-completed_tasks()
+
+get_completed_tasks()
 
 #Print a list of all task descriptions
 
-def task_descriptions():
-    list_of_descriptions_of_tasks = []
-    for task in tasks:
-        list_of_descriptions_of_tasks.append(task["description"])
+# def task_descriptions():
+    # descriptions_of_tasks = []
+    # for task in tasks:
+        # list_of_descriptions_of_tasks.append(task["description"])
 
-    print(list_of_descriptions_of_tasks)
+    # print(list_of_descriptions_of_tasks)
 
-task_descriptions()
+# task_descriptions()
 
 #Print a list of tasks where time_taken is at least a given time
 
-def minutes_taken():
-    list_of_tasks_that_take_longer = []
-    for task in tasks:
-        if task ["time_taken"] > 25:
-            list_of_tasks_that_take_longer.append(task["description"])
+def get_tasks_taking_longer_than(list_of_tasks, time):
+    found_tasks = []
+    for task in list_of_tasks:
+        if task["time_take"] >= time:
+            found_tasks.append(task)
 
-    print(list_of_tasks_that_take_longer)
+    return found_tasks
 
-minutes_taken()
+
+
+print(get_tasks_taking_longer_than(tasks))    
+
+get_tasks_taking_longer_than()
+
+tasks_lasting_at_least_30 = get_tasks_taking_longer_than(tasks, 30)
+print(get_uncompleted_tasks(tasks_lasting_at_least_30))
+
+#def minutes_taken():
+#   list_of_tasks_that_take_longer = []
+    #for task in tasks:
+        #if task ["time_taken"] > 25:
+            # list_of_tasks_that_take_longer.append(task["description"])
+
+#    print(list_of_tasks_that_take_longer)
+
+# minutes_taken()
 
 #Print any task with a given description
 
-def description_given():
-    description_to_print = []
-    for task in tasks:
-        if task ["description"] == "Walk Dog":
-            description_to_print.append(task["description"])
+#def description_given():
+    #description_to_print = []
+    # for task in tasks:
+        # if task ["description"] == "Walk Dog":
+            # description_to_print.append(task["description"])
 
-    print(description_to_print)
+    # print(description_to_print)
 
-description_given()
+# description_given()
 
 
-#Given a description update that task to mark it as complete.
+#Given a description, update that task to mark it as complete.
 
+def get_task_with_description(list_of_tasks, description):
+    #found_task = None
+    for task in list_of_tasks:
+        if task["description"] == description:
+            return task
+    
+    return None
+
+print(get_task_with_description(tasks, "Make dinner"))
+
+def mark_task_as_complete(list_of_tasks, description):
+    task = get_task_with_description(list_of_tasks, description)
+    task ["completed"] = True
+
+print(get_task_with_description(tasks, "Wash Dishes"))
+
+mark_task_as_complete(tasks, "Wash Dishes")
+print(get_task_with_description(tasks,"Wash Dishes"))
